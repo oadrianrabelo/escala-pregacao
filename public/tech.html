@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechEduca - Ferramentas Educacionais</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      header p {
+        font-size: 1.1em;
+        opacity: 0.9;
+      }
+
+      .search-section {
+        padding: 30px;
+        background: #f8f9fa;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .search-box {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .search-box input {
+        flex: 1;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border 0.3s;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .search-box button {
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: transform 0.2s;
+      }
+
+      .search-box button:hover {
+        transform: scale(1.05);
+      }
+
+      .filters {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 10px 20px;
+        background: white;
+        border: 2px solid #667eea;
+        color: #667eea;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .tools-section {
+        padding: 30px;
+      }
+
+      .section-title {
+        font-size: 1.8em;
+        color: #333;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #667eea;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+      }
+
+      .tool-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 25px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .tool-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+      }
+
+      .tool-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin-bottom: 15px;
+      }
+
+      .tool-card h3 {
+        color: #333;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+      }
+
+      .tool-card .category {
+        display: inline-block;
+        padding: 5px 15px;
+        background: #e7e9fc;
+        color: #667eea;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .tool-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .tool-card .age-range {
+        color: #999;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .stars {
+        color: #ffd700;
+        font-size: 18px;
+      }
+
+      .rating-count {
+        color: #999;
+        font-size: 0.9em;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        padding: 30px;
+        background: #f8f9fa;
+        margin-top: 20px;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #667eea;
+        display: block;
+      }
+
+      .stat-label {
+        color: #666;
+        margin-top: 5px;
+      }
+
+      footer {
+        background: #2d3748;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .tools-grid {
+          grid-template-columns: 1fr;
+        }
+
+        header h1 {
+          font-size: 1.8em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎓 TechEduca</h1>
+        <p>
+          Plataforma Colaborativa de Ferramentas Tecnológicas para Educação
+          Infantil
+        </p>
+      </header>
+
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" placeholder="Buscar ferramentas educacionais..." />
+          <button>🔍 Buscar</button>
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active">Todas</button>
+          <button class="filter-btn">0-3 anos</button>
+          <button class="filter-btn">4-5 anos</button>
+          <button class="filter-btn">Jogos</button>
+          <button class="filter-btn">Aplicativos</button>
+          <button class="filter-btn">Vídeos</button>
+        </div>
+      </div>
+
+      <div class="tools-section">
+        <h2 class="section-title">Ferramentas Recomendadas</h2>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-icon">🎨</div>
+            <span class="category">Criatividade</span>
+            <h3>Toca Boca Paint</h3>
+            <p class="age-range">👶 Idade: 3-5 anos</p>
+            <p>
+              Aplicativo de pintura digital que estimula a criatividade através
+              de ferramentas intuitivas e seguras para crianças.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span class="rating-count">(127 avaliações)</span>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🔢</div>
+            <span class="category">Matemática</span>
+            <h3>Khan Academy Kids</h3>
+            <p class="age-range">👶 Idade: 2-5 anos</p>
+            <p>
+              Plataforma educacional gratuita com atividades de matemática,
+              leitura e desenvolvimento socioemocional.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span class="rating-count">(245 avaliações)</span>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">📚</div>
+            <span class="category">Leitura</span>
+            <h3>Elefante Letrado</h3>
+            <p class="age-range">👶 Idade: 4-6 anos</p>
+            <p>
+              Biblioteca digital com livros interativos que incentivam o hábito
+              da leitura e desenvolvimento linguístico.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐</span>
+              <span class="rating-count">(89 avaliações)</span>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🎵</div>
+            <span class="category">Música</span>
+            <h3>Bebê Musical</h3>
+            <p class="age-range">👶 Idade: 0-3 anos</p>
+            <p>
+              Aplicativo com instrumentos virtuais e canções educativas que
+              desenvolvem percepção musical e coordenação motora.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span class="rating-count">(156 avaliações)</span>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🧩</div>
+            <span class="category">Lógica</span>
+            <h3>Jogos Educativos Infantis</h3>
+            <p class="age-range">👶 Idade: 3-5 anos</p>
+            <p>
+              Coleção de jogos que trabalham raciocínio lógico, memória, cores e
+              formas de maneira lúdica e interativa.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐</span>
+              <span class="rating-count">(203 avaliações)</span>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🌍</div>
+            <span class="category">Ciências</span>
+            <h3>Mundo Bita Explorador</h3>
+            <p class="age-range">👶 Idade: 3-6 anos</p>
+            <p>
+              Aplicativo educativo que ensina sobre natureza, animais e meio
+              ambiente através de vídeos e atividades interativas.
+            </p>
+            <div class="rating">
+              <span class="stars">⭐⭐⭐⭐⭐</span>
+              <span class="rating-count">(178 avaliações)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-number">156</span>
+          <span class="stat-label">Ferramentas Cadastradas</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2.847</span>
+          <span class="stat-label">Professores Cadastrados</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">5.234</span>
+          <span class="stat-label">Avaliações Realizadas</span>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          TechEduca © 2025 - Projeto Integrador - Análise e Desenvolvimento de
+          Sistemas
+        </p>
+        <p>Andressa Celine Flores Batista</p>
+      </footer>
+    </div>
+  </body>
+</html>
