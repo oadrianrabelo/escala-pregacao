@@ -41,14 +41,14 @@ export const TEMAS: Tema[] = [
     cores: {
       primaria: "#2563eb",
       primariaDark: "#1e40af",
-      sabado: "#dbeafe",
-      quarta: "#dcfce7",
-      domingo: "#ede9fe",
+      sabado: "#eff6ff", // Blue-50 (Azul muito leve e sóbrio)
+      quarta: "#f8fafc",
+      domingo: "#ffffff", // Branco puro
       texto: "#000000",
       textoSecundario: "#2563eb",
       borda: "#cbd5e1",
       fundoAlternado: "#f8fafc",
-      fundoHover: "#e0f2fe",
+      fundoHover: "#eff6ff",
     },
   },
   {
