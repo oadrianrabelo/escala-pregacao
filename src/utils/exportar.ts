@@ -207,7 +207,7 @@ export const exportarParaPDF = (
       </style>
     </head>
     <body>
-      <div class="tema-badge">Tema: ${tema.nome}</div>
+      
       
       <div class="header">
         <h1>ESCALA DE PREGAÇÃO - ${MESES[mes]} ${ano}</h1>
