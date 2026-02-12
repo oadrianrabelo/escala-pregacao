@@ -2,6 +2,7 @@
 import React from "react";
 import { Calendar, Download, FileText } from "lucide-react";
 import { MESES } from "@/types/culto";
+import Image from "next/image";
 
 interface HeaderProps {
   mesAtual: number;
@@ -19,10 +20,17 @@ export const Header: React.FC<HeaderProps> = ({
   onExportarPDF,
 }) => {
   return (
+
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <Calendar className="w-8 h-8 text-blue-600" />
+        <div className="flex items-center gap-1">
+          <Image
+            src="/logo-circular.png"
+            alt="Logo da Igreja"
+            width={200}
+            height={200}
+            className="w-24 h-24 rounded-full object-cover"
+          />
           <div>
             <h1 className="text-3xl font-bold text-gray-800">
               Escala de Pregação
