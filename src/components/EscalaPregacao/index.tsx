@@ -10,6 +10,7 @@ import { CultoCard } from "./CultoCard";
 import { ModalCulto } from "./ModalCulto";
 import { ModalSelecaoTema } from "./ModalSelecaoTema";
 import { ListaPregadores } from "./ListaPregadores";
+import { ModalConfiguracao } from "../../../components/EscalaPregacao/ModalConfiguracao";
 
 const EscalaPregacao = () => {
   const {
@@ -30,6 +31,7 @@ const EscalaPregacao = () => {
 
   const [mostrarModalCulto, setMostrarModalCulto] = useState(false);
   const [mostrarModalTema, setMostrarModalTema] = useState(false);
+  const [mostrarModalConfig, setMostrarModalConfig] = useState(false);
 
   const handleAdicionarCulto = (novoCulto: {
     data: string;
@@ -52,7 +54,7 @@ const EscalaPregacao = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 fade-in">
       <div className="max-w-7xl mx-auto">
         <Header
           mesAtual={mesAtual}
@@ -60,6 +62,7 @@ const EscalaPregacao = () => {
           onMudarMes={mudarMes}
           onExportarTexto={handleExportarTexto}
           onExportarPDF={() => setMostrarModalTema(true)}
+          onAbrirConfiguracao={() => setMostrarModalConfig(true)}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -123,6 +126,10 @@ const EscalaPregacao = () => {
           <ModalSelecaoTema
             onConfirmar={handleExportarPDF}
             onFechar={() => setMostrarModalTema(false)}
+          />
+        )}
+        {mostrarModalConfig && (
+          <ModalConfiguracao onFechar={() => setMostrarModalConfig(false)}
           />
         )}
       </div>
