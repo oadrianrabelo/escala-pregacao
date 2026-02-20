@@ -1,22 +1,52 @@
-name: Release
+name: Create Release
 
 on:
   push:
     tags:
-      - 'v*'
-      
+      - "v*"
+
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
+      - name: Generate Detailed Changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo "HEAD~10")
+          CURRENT_TAG=$(git describe --tags --abbrev=0 HEAD)
+
+          echo "## 📋 Changelog - $CURRENT_TAG" > CHANGELOG_TEMP.md
+          echo "" >> CHANGELOG_TEMP.md
+
+          echo "### ✨ Features" >> CHANGELOG_TEMP.md
+          git log $PREV_TAG..HEAD --grep="feat:" --oneline | sed 's/^/- /' >> CHANGELOG_TEMP.md
+          echo "" >> CHANGELOG_TEMP.md
+
+          echo "### 🐛 Bug Fixes" >> CHANGELOG_TEMP.md
+          git log $PREV_TAG..HEAD --grep="fix:" --oneline | sed 's/^/- /' >> CHANGELOG_TEMP.md
+          echo "" >> CHANGELOG_TEMP.md
+
+          echo "### 📝 Documentation" >> CHANGELOG_TEMP.md
+          git log $PREV_TAG..HEAD --grep="docs:" --oneline | sed 's/^/- /' >> CHANGELOG_TEMP.md
+          echo "" >> CHANGELOG_TEMP.md
+
+          echo "### 🔧 Other Changes" >> CHANGELOG_TEMP.md
+          git log $PREV_TAG..HEAD --oneline | grep -v "feat:\|fix:\|docs:" | sed 's/^/- /' >> CHANGELOG_TEMP.md
+
+          cat CHANGELOG_TEMP.md
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
+          body_path: CHANGELOG_TEMP.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
