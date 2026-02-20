@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { Calendar, Download, FileText, Settings } from "lucide-react";
-import { MESES } from "@/types/culto";
+import { Culto, MESES } from "@/types/culto";
 import Image from "next/image";
 import { useConfig } from "../../../context/ConfigContext";
+import { exportarIcal } from "@/utils/exportarIcal";
 
 interface HeaderProps {
   mesAtual: number;
   anoAtual: number;
+  cultos: Culto[];
   onMudarMes: (direcao: number) => void;
   onExportarTexto: () => void;
   onExportarPDF: () => void;
@@ -17,14 +19,14 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   mesAtual,
   anoAtual,
+  cultos,
   onMudarMes,
   onExportarTexto,
   onExportarPDF,
-  onAbrirConfiguracao
+  onAbrirConfiguracao,
 }) => {
   const { nomeIgreja } = useConfig();
   return (
-
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -50,7 +52,6 @@ export const Header: React.FC<HeaderProps> = ({
             title="Configurações"
           >
             <Settings className="w-6 h-6" />
-
           </button>
           <button
             onClick={onExportarPDF}
@@ -66,11 +67,14 @@ export const Header: React.FC<HeaderProps> = ({
             <Download className="w-5 h-5" />
             Exportar TXT
           </button>
+          <button
+            onClick={() => exportarIcal(cultos)}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            📅 Exportar iCal
+          </button>
         </div>
       </div>
-
-
-
 
       {/* Seletor de Mês */}
       <div className="flex items-center justify-center gap-4">

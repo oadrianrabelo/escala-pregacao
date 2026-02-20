@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.2.0...v0.3.0) (2026-02-20)
+
+
+### Features
+
+* **ical:** adicionar exportacao de cultos em iCal (`.ics`) ([09e5a55](https://github.com/oadrianrabelo/escala-pregacao/commit/09e5a55204ab900ccdaa6fb27c069c6a072c6897))
+* **pwa:** adiciona suporte a `PWA` com o `manifest.json` ([aaea54d](https://github.com/oadrianrabelo/escala-pregacao/commit/aaea54ddd870310302cd7ddb1599a2d690939aed))
+
+
+### Bug Fixes
+
+* **`useescalapregacao`:** corrigir renderizao em cascata ([8aa39fd](https://github.com/oadrianrabelo/escala-pregacao/commit/8aa39fd5fd741624242446c28dffd0c4ea574b08))
+* **actions:** melhora `changelog` automatico ([8fd61ae](https://github.com/oadrianrabelo/escala-pregacao/commit/8fd61ae26f2d57879807f8af4e0edc76c887ca32))
+
 ## [0.2.0](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.1.1...v0.2.0) (2026-02-20)
 
 

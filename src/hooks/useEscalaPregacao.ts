@@ -7,31 +7,27 @@ const STORAGE_KEY_CULTOS = "escala-pregacao-cultos";
 const STORAGE_KEY_PREGADORES = "escala-pregacao-pregadores";
 
 const PREGADORES_PADRAO = [
-  "Pastor Raphael",
-  "Manoel",
-  "Ádrian",
-  "Andressa",
-  "Elena",
-  "Ivânia",
-  "Eliana",
-  "Reginaldo"
-]
+  "Pastor João",
+  "Irmão Mateus",
+  "Irmão Marcos",
+  "Irmão Lucas",
+  "Irmã Ester",
+];
 
 function carregarCultos(): Culto[] {
-  if (typeof window === 'undefined') return []
+  if (typeof window === "undefined") return [];
 
   try {
     const json = localStorage.getItem(STORAGE_KEY_CULTOS);
 
     if (!json) return [];
-    return JSON.parse(json).map((c: any) => ({
+    return JSON.parse(json).map((c: Culto) => ({
       ...c,
       data: new Date(c.data),
     }));
   } catch {
     return [];
   }
-
 }
 
 function carregarPregadores(): string[] {
@@ -50,9 +46,28 @@ export const useEscalaPregacao = () => {
   const [anoAtual, setAnoAtual] = useState(new Date().getFullYear());
   const [cultos, setCultos] = useState<Culto[]>([]);
   const [pregadores, setPregadores] = useState<string[]>(PREGADORES_PADRAO);
+  const isInitialized = useRef(false);
+
+  useEffect(() => {
+    isInitialized.current = true;
+  }, []);
+
+  // Salva cultos quando mudam (após inicializar)
+  useEffect(() => {
+    if (!isInitialized.current) return;
+
+    localStorage.setItem(STORAGE_KEY_CULTOS, JSON.stringify(cultos));
+  }, [cultos]);
+
+  // Salva pregadores quando mudam (após inicializar)
+  useEffect(() => {
+    if (!isInitialized.current) return;
+
+    localStorage.setItem(STORAGE_KEY_PREGADORES, JSON.stringify(pregadores));
+  }, [pregadores]);
 
   const adicionarCulto = (
-    novoCulto: Omit<Culto, "id" | "data"> & { data: string }
+    novoCulto: Omit<Culto, "id" | "data"> & { data: string },
   ) => {
     const cultoParaAdicionar: Culto = {
       id: `culto-${Date.now()}`,
@@ -66,49 +81,11 @@ export const useEscalaPregacao = () => {
     setCultos([...cultos, cultoParaAdicionar]);
   };
 
-  const isInitialized = useRef(false);
-
-  useEffect(() => {
-    const cultosCarregados = carregarCultos();
-    const pregadoresCarregados = carregarPregadores();
-
-    if (cultosCarregados.length > 0) {
-      setCultos(cultosCarregados);
-    }
-
-    const jsonPregadores = localStorage.getItem(STORAGE_KEY_PREGADORES);
-    if (jsonPregadores) {
-      setPregadores(pregadoresCarregados);
-    }
-
-    // marca como inicializado DEPOIS de carregar
-    isInitialized.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (!isInitialized.current) {
-      isInitialized.current = true;
-
-      return;
-    }
-
-    localStorage.setItem(STORAGE_KEY_CULTOS, JSON.stringify(cultos));
-  }, [cultos]);
-
-
-  useEffect(() => {
-    if (!isInitialized.current) return;
-
-    localStorage.setItem(STORAGE_KEY_PREGADORES, JSON.stringify(pregadores));
-  }, [pregadores]);
-
-
-
   const atualizarCulto = (id: string, campo: keyof Culto, valor: string) => {
     setCultos(
       cultos.map((culto) =>
-        culto.id === id ? { ...culto, [campo]: valor } : culto
-      )
+        culto.id === id ? { ...culto, [campo]: valor } : culto,
+      ),
     );
   };
 
