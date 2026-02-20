@@ -22,8 +22,8 @@ export const CultoCard: React.FC<CultoCardProps> = ({
   const diaSemana = DIAS_SEMANA[culto.data.getDay()];
 
   return (
-    <div className={`border-2 rounded-lg p-4 ${getDiaCor(culto.data)}`}>
-      <div className="flex items-start justify-between mb-3">
+    <div className={`border-2 rounded-lg p-4 ${getDiaCor(culto.data)} fade-in`}>
+      <div className="flex items-start justify-between mb-3 ">
         <div>
           <div className="font-bold text-lg text-gray-800">
             {culto.data.toLocaleDateString("pt-BR", {

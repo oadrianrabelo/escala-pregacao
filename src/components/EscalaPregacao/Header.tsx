@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { Calendar, Download, FileText } from "lucide-react";
+import { Calendar, Download, FileText, Settings } from "lucide-react";
 import { MESES } from "@/types/culto";
 import Image from "next/image";
+import { useConfig } from "../../../context/ConfigContext";
 
 interface HeaderProps {
   mesAtual: number;
@@ -10,6 +11,7 @@ interface HeaderProps {
   onMudarMes: (direcao: number) => void;
   onExportarTexto: () => void;
   onExportarPDF: () => void;
+  onAbrirConfiguracao: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,12 +20,14 @@ export const Header: React.FC<HeaderProps> = ({
   onMudarMes,
   onExportarTexto,
   onExportarPDF,
+  onAbrirConfiguracao
 }) => {
+  const { nomeIgreja } = useConfig();
   return (
 
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
           <Image
             src="/logo-circular.png"
             alt="Logo da Igreja"
@@ -35,10 +39,19 @@ export const Header: React.FC<HeaderProps> = ({
             <h1 className="text-3xl font-bold text-gray-800">
               Escala de Pregação
             </h1>
-            <p className="text-gray-600">Igreja Adventista do Sétimo Dia</p>
+            <p className="text-gray-600">{nomeIgreja}</p>
           </div>
         </div>
-        <div className="flex gap-3">
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onAbrirConfiguracao}
+            className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition mr-2 border-r border-gray-200 pr-3"
+            title="Configurações"
+          >
+            <Settings className="w-6 h-6" />
+
+          </button>
           <button
             onClick={onExportarPDF}
             className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
@@ -55,6 +68,9 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
       </div>
+
+
+
 
       {/* Seletor de Mês */}
       <div className="flex items-center justify-center gap-4">
