@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.1.1...v0.2.0) (2026-02-20)
+
+
+### Features
+
+* **config:** adiciona `ConfigContext` e `ModalConfiguracao` para gerenciar nome da igreja ([65e689b](https://github.com/oadrianrabelo/escala-pregacao/commit/65e689b034ea23c815daad228689baf95e568af6))
+* **header:** adiciona botao de configuracoes e exibe nome da igreja dinamicamente ([89d90d2](https://github.com/oadrianrabelo/escala-pregacao/commit/89d90d281f4ac0825deff535b271ee3951fe0ced))
+
 ### 0.1.1 (2026-02-12)
 
 
