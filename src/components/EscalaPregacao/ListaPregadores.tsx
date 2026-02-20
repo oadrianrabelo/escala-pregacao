@@ -33,7 +33,7 @@ export const ListaPregadores: React.FC<ListaPregadoresProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-lg shadow-lg p-6 fade-in">
         <div className="flex items-center gap-2 mb-4">
           <Users className="w-6 h-6 text-blue-600" />
           <h3 className="text-xl font-bold text-gray-800">Pregadores</h3>
