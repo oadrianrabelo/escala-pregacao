@@ -59,6 +59,7 @@ const EscalaPregacao = () => {
         <Header
           mesAtual={mesAtual}
           anoAtual={anoAtual}
+          cultos={cultos}
           onMudarMes={mudarMes}
           onExportarTexto={handleExportarTexto}
           onExportarPDF={() => setMostrarModalTema(true)}
@@ -86,7 +87,7 @@ const EscalaPregacao = () => {
                   <Calendar className="w-16 h-16 mx-auto mb-4 opacity-50" />
                   <p className="text-lg">Nenhum culto adicionado ainda</p>
                   <p className="text-sm">
-                    Clique em "Adicionar Culto" para começar
+                    Clique em &quot;Adicionar Culto&quot; para começar
                   </p>
                 </div>
               ) : (
@@ -129,8 +130,7 @@ const EscalaPregacao = () => {
           />
         )}
         {mostrarModalConfig && (
-          <ModalConfiguracao onFechar={() => setMostrarModalConfig(false)}
-          />
+          <ModalConfiguracao onFechar={() => setMostrarModalConfig(false)} />
         )}
       </div>
     </div>
