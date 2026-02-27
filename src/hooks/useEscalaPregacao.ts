@@ -42,10 +42,12 @@ function carregarPregadores(): string[] {
 }
 
 export const useEscalaPregacao = () => {
+  const [cultos, setCultos] = useState<Culto[]>(() => carregarCultos());
+  const [pregadores, setPregadores] = useState<string[]>(() =>
+    carregarPregadores(),
+  );
   const [mesAtual, setMesAtual] = useState(new Date().getMonth());
   const [anoAtual, setAnoAtual] = useState(new Date().getFullYear());
-  const [cultos, setCultos] = useState<Culto[]>([]);
-  const [pregadores, setPregadores] = useState<string[]>(PREGADORES_PADRAO);
   const isInitialized = useRef(false);
 
   useEffect(() => {

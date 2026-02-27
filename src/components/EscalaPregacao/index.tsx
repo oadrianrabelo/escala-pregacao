@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, Plus } from "lucide-react";
 import { useEscalaPregacao } from "@/hooks/useEscalaPregacao";
 import { exportarParaTexto, exportarParaPDF } from "@/utils/exportar";
