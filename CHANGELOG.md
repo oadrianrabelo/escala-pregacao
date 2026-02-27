@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.3.1...v0.3.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* corrige `hydration mismatch` com `dynamic import` ([5bc57ad](https://github.com/oadrianrabelo/escala-pregacao/commit/5bc57ad017dadf5fa6471002619f2e70ae4bc1dc))
+* corrige carregamento dos dados de `localStorage` ([b92f56a](https://github.com/oadrianrabelo/escala-pregacao/commit/b92f56a940465cdd01271cf2d60a73cc7ab1ff9b))
+
 ### [0.3.1](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.3.0...v0.3.1) (2026-02-20)
 
 
