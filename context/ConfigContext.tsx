@@ -2,10 +2,10 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+const STORAGE_KEY_NOME_IGREJA = "escala-pregacao-nome-igreja";
 interface ConfigContextType {
   nomeIgreja: string;
   setNomeIgreja: (nome: string) => void;
-  carregando: boolean;
 }
 
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
@@ -13,31 +13,28 @@ const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [nomeIgreja, setNomeIgreja] = useState(
-    "Igreja Adventista do Sétimo Dia"
-  );
-  const [carregando, setCarregando] = useState(true);
+  const [nomeIgreja, setNomeIgreja] = useState<string>(() => {
+    if (typeof window === "undefined") return "Igreja Adventista do Sétimo Dia";
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_NOME_IGREJA);
+      return saved ?? "Igreja Adventista do Sétimo Dia";
+    } catch {
+      return "Igreja Adventista do Sétimo Dia";
+    }
+  });
 
   useEffect(() => {
-    // Carregar do localStorage
-    if (typeof window !== "undefined") {
-      const salvo = localStorage.getItem("config-nome-igreja");
-      if (salvo) {
-        setNomeIgreja(salvo);
-      }
-      setCarregando(false);
-    }
-  }, []);
+    // Salvar no localStorage quando nomeIgreja mudar
+    if (typeof window !== "undefined") return;
 
-  useEffect(() => {
-    // Salvar no localStorage quando mudar
-    if (typeof window !== "undefined" && !carregando) {
-      localStorage.setItem("config-nome-Igreja", nomeIgreja);
-    }
-  }, [nomeIgreja, carregando]);
+    try {
+      localStorage.setItem(STORAGE_KEY_NOME_IGREJA, nomeIgreja);
+    } catch {}
+  }, [nomeIgreja]);
 
   return (
-    <ConfigContext.Provider value={{ nomeIgreja, setNomeIgreja, carregando }}>
+    <ConfigContext.Provider value={{ nomeIgreja, setNomeIgreja }}>
       {children}
     </ConfigContext.Provider>
   );
