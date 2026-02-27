@@ -26,7 +26,7 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     // Salvar no localStorage quando nomeIgreja mudar
-    if (typeof window !== "undefined") return;
+    if (typeof window === "undefined") return;
 
     try {
       localStorage.setItem(STORAGE_KEY_NOME_IGREJA, nomeIgreja);
