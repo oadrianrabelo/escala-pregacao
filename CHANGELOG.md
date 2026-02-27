@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.3.2...v0.3.4) (2026-02-27)
+
+
+### Bug Fixes
+
+* corrige nome da igreja salvo no `localStorage` e remove redundancia ([3bebef1](https://github.com/oadrianrabelo/escala-pregacao/commit/3bebef1c4bf2e481ae04960297fea10df47a1081))
+* corrigir condição de verificação do window no `ConfigContext` ([4655dfa](https://github.com/oadrianrabelo/escala-pregacao/commit/4655dfa24210b9255daf5013087eefe1d0070b22))
+
 ### [0.3.2](https://github.com/oadrianrabelo/escala-pregacao/compare/v0.3.1...v0.3.2) (2026-02-27)
 
 
